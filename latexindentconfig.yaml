@@ -8,3 +8,9 @@ indentRules:
    section: " "
    item: "    "
    myitem: "        "
+
+modifyLineBreaks:
+    oneSentencePerLine:
+        manipulateSentences: 1
+        sentencesFollow:
+            blankLine: 0

@@ -1,60 +1,40 @@
 --[[
 
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
+Modified from Kickstart.nvim (https://github.com/nvim-lua/kickstart.nvim)
 
-Kickstart.nvim is *not* a distribution.
+Managed in this file:
+- various variables and keybindings
+- lazy.nvim
+- telescope
+- treesitter
+- mason (languages)
+- lualine
+- luasnip
+- neovide options
 
-Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, and understand
-  what your configuration is doing.
+TODO: maybe inline theme and autodark, and put lualine with it?
 
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
-
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-
-  And then you can explore or search through `:help lua-guide`
-
-
-Kickstart Guide:
-
-I have left several `:help X` comments throughout the init.lua
-You should run that command and read that help section for more information.
-
-In addition, I have some `NOTE:` items throughout the file.
-These are for you, the reader to help understand what is happening. Feel free to delete
-them once you know what you're doing, but they should serve as a guide for when you
-are first encountering a few different constructs in your nvim config.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now :)
+lua guide: - https://learnxinyminutes.com/docs/lua/
+For translating between vimscript and lua, search through `:help lua-guide`
 --]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- See `:help mapleader`. NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = ','
 
-vim.opt.foldmethod = "syntax"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99
 
--- -- disable netrw at the very start of your init.lua for nvim-tree (strongly advised)
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 -- floating windows and popups
-vim.opt.winblend = 30
-vim.opt.pumblend = 30
+vim.opt.winblend = 20
+vim.opt.pumblend = 20
 
--- Install package manager
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
+
+
+
+
+
+-- Install package manager,  https://github.com/folke/lazy.nvim, see `:help lazy.nvim.txt`
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -74,17 +54,12 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
-  -- Git related plugins
-  'tpope/vim-fugitive',
+  'tpope/vim-fugitive', -- Git related plugins
   'tpope/vim-rhubarb',
+  'tpope/vim-sleuth',   -- Detect tabstop and shiftwidth automatically
 
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
+  -- LSP related plugins:
+  -- configuration is done below. Search for lspconfig to find configs.
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -92,16 +67,22 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
-
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
   },
-
+  -- Luasnip (Added to try to make snippets work?)
+  {
+    'L3MON4D3/LuaSnip',
+    config = function()
+      -- Load snippets
+      require("luasnip.loaders.from_lua").load({ path = "~/.config/nvim/snippets/" }) -- added luasnip path
+      require("luasnip.loaders.from_vscode").load({ path = "~/.config/nvim/snippets/vscode_snippets" })
+    end
+  },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -120,33 +101,31 @@ require('lazy').setup({
         change = { text = '~' },
         delete = { text = '_' },
         topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        changedelete = { text = '≃' },
       },
     },
   },
 
   {
-    -- Theme inspired by Atom
-    -- 'navarasu/onedark.nvim',
-    -- 'olimorris/onedarkpro.nvim',
-    -- priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'onedark'
-    -- end,
-  },
-
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    event = { 'VimEnter' },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      -- 'linrongbin16/lsp-progress.nvim'
+    },
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = true,
         -- theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = '󱐋',
+        section_separators = { left = '', right = '' },
       },
-      sections = { lualine_c = { 'filename', "vim.g['metals_status']" }, },
+      sections = {
+        lualine_c = { 'filename', "vim.g['metals_status']" },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+      },
     },
   },
 
@@ -156,7 +135,7 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
     opts = {
-      char = '┊',
+      char = '┇',
       show_trailing_blankline_indent = false,
     },
   },
@@ -187,7 +166,7 @@ require('lazy').setup({
   },
 
   {
-    -- Highlight, edit, and navigate code
+    -- treesitter: Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -204,49 +183,39 @@ require('lazy').setup({
   require 'kickstart.plugins.debug',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   --
   --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
   { import = 'custom.plugins' },
-}, {})
+}, {                 -- this is the opts table for Lazy (custom: empty in original kickstart.nvim)
+  border = "rounded" -- doesn't seem to work though?
+})
+
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Set highlight on search
-vim.o.hlsearch = false
-
--- Make line numbers default
-vim.wo.number = true
-vim.wo.relativenumber = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.hlsearch = false       -- Set highlight on search
+vim.wo.number = true         -- line numbers
+vim.wo.relativenumber = true -- relative line numbers
+vim.o.mouse = 'a'            -- Enable mouse mode
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
--- Enable break indent
-vim.o.breakindent = true
+vim.o.breakindent = true -- Enable break indent
+vim.o.undofile = true    -- Save undo history. see also ./lua/custom/plugin/undotree.lua
 
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
+vim.o.ignorecase = true  -- Case insensitive searching UNLESS /C or capital in search
 vim.o.smartcase = true
 
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default
 
--- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 250    -- Decrease update time
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
@@ -266,8 +235,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- [[ Custom Keymaps ]]
-vim.keymap.set('n', '<D-/>', 'gcc')
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -301,7 +268,7 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
+    winblend = 30,
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
@@ -316,13 +283,14 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'latex' },
+  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'latex' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
 
   highlight = { enable = true },
   rainbow = {
+    -- added rainbow bracketing, see lua/custom/plugins/highlighting.lua
     enable = true,
     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
     extended_mode = false, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
@@ -398,6 +366,25 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- LSP settings.
+
+-- -- custom for borders
+local _border = "rounded"
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = _border
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = _border
+  }
+)
+
+vim.diagnostic.config {
+  float = { border = _border }
+}
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -415,7 +402,8 @@ local on_attach = function(_, bufnr)
   end
 
 
-
+  -- HACK: this is just copied into ./lua/custom/plugins/metals.lua, BY HAND. So if you change something here, do it again there
+  -- TODO: figure out how to reduce code duplication...
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -494,7 +482,6 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
-
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
@@ -514,16 +501,16 @@ luasnip.config.setup { -- custom setup taken from https://www.youtube.com/watch?
   -- },
 }
 
-require("luasnip.loaders.from_lua").lazy_load({ path = "~/.config/nvim/snippets/" }) -- added luasnip path
 
--- custom from tjdv's video on luasnip: <c-k> is my expansion keys
+
+-- custom from tjdv's video on luasnip: <c-k> is my expansion keys:
 -- this will expand the current item or jump to the next item within the snippet.
-vim.keymap.set({ "i", "s" }, "<c-k>", function()
-  if luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
-  end
-end, { silent = true }
-)
+-- vim.keymap.set({ "i", "s" }, "<c-k>", function()
+--   if luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   end
+-- end, { silent = true }
+-- )
 
 cmp.setup {
   snippet = {
@@ -563,11 +550,13 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp' },
+    {
+      name = 'nvim_lsp',
+    },
     { name = 'luasnip' },
-    -- { name = 'omni', },
   },
   formatting = {
+    -- added labels on the LHS
     fields = { 'menu', 'abbr', 'kind' },
     format = function(entry, item)
       local menu_icon = {
@@ -595,12 +584,12 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 
 -- stolen from https://neovide.dev/faq.html
 
-vim.keymap.set('n', '<D-s>', ':w<CR>')      -- Save
-vim.keymap.set('v', '<D-c>', '"+y')         -- Copy
-vim.keymap.set('n', '<D-v>', '"+P')         -- Paste normal mode
-vim.keymap.set('v', '<D-v>', '"+P')         -- Paste visual mode
-vim.keymap.set('c', '<D-v>', '<C-R>+')      -- Paste command mode
-vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+-- vim.keymap.set('n', '<D-s>', ':w<CR>')      -- Save
+-- vim.keymap.set('v', '<D-c>', '"+y')         -- Copy
+-- vim.keymap.set('n', '<D-v>', '"+P')         -- Paste normal mode
+-- vim.keymap.set('v', '<D-v>', '"+P')         -- Paste visual mode
+-- vim.keymap.set('c', '<D-v>', '<C-R>+')      -- Paste command mode
+-- vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
 
 vim.cmd(':set cursorline')
 vim.cmd('set whichwrap+=<,>,h,l,[,]')
@@ -614,7 +603,6 @@ if vim.g.neovide then
   --
   -- local colors = color.get_preloaded_colors()
 
-
   -- -- Helper function for transparency formatting
   -- local alpha = function()
   --   return string.format("%x", math.floor((255 * vim.g.transparency) or 0.8))
@@ -625,78 +613,64 @@ if vim.g.neovide then
   -- vim.g.neovide_background_color = colors.bg .. alpha()
 end
 
--- Metals setup (scala LSP)
---
-local metals_config = require("metals").bare_config()
-
--- Example of settings
-metals_config.settings = {
-  showImplicitArguments = true,
-  showImplicitConversionsAndClasses = true,
-  -- excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-}
-
--- *READ THIS*
--- I *highly* recommend setting statusBarProvider to true, however if you do,
--- you *have* to have a setting to display this in your statusline or else
--- you'll not see any messages from metals. There is more info in the help
--- docs about this
-metals_config.init_options.statusBarProvider = true
-
--- Example if you are using cmp how to make sure the correct capabilities for snippets are set
-metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- Debug settings if you're using nvim-dap
-local dap = require("dap")
-
-dap.configurations.scala = {
-  {
-    type = "scala",
-    request = "launch",
-    name = "RunOrTest",
-    metals = {
-      runType = "runOrTestFile",
-      --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-    },
-  },
-  {
-    type = "scala",
-    request = "launch",
-    name = "Test Target",
-    metals = {
-      runType = "testTarget",
-    },
-  },
-}
-
-metals_config.on_attach = function(client, bufnr)
-  require("metals").setup_dap()
-end
-
--- Autocmd that will actually be in charging of starting the whole thing
-local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  -- NOTE: You may or may not want java included here. You will need it if you
-  -- want basic Java support but it may also conflict if you are using
-  -- something like nvim-jdtls which also works on a java filetype autocmd.
-  pattern = { "scala", "sbt", "java" },
-  callback = function()
-    require("metals").initialize_or_attach(metals_config)
-  end,
-  group = nvim_metals_group,
-})
-
 -- require "telescope".extensions.metals.commands()
+
 
 -- ThePrimeagen style remap, https://www.youtube.com/watch?v=KfENDDEpCsI&list=PLm323Lc7iSW_wuxqmKx_xxNtJC_hJbQ7R&index=3
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("x", "<leader>p", "\"_dP")
+-- for some reason these below are not working so are commented out.
+-- vim.keymap.set("n", "÷", "gcc") -- <D-/> (D = option)
+-- vim.keymap.set("v", "÷", "gc")
+-- vim.keymap.set("n", "<D-/>", "gcc")
+
+-- indentation
+vim.keymap.set("n", "˙", "<<") -- option h and l (<D-h>, <D-l>)
+vim.keymap.set("n", "¬", ">>")
+vim.keymap.set("v", "˙", "<gv") -- works on lines and blocks(!)
+vim.keymap.set("v", "¬", ">gv")
+
+vim.keymap.set('n', '˚', '"addk"aP')         -- option k; note that this deletes lines at the top of the text!
+vim.keymap.set('n', '∆', '"add"ap')
+vim.keymap.set('v', '˚', '"ad<esc>k"aP`[V`]') -- only use these two when
+vim.keymap.set('v', '∆', '"ad<esc>"ap`[V`]') -- in visual line mode.
+
+vim.keymap.set('n', '', '"ayy"aP')         -- option k; note that this deletes lines at the top of the text!
+vim.keymap.set('n', 'Ô', '"ayy"ap')          -- duplicate lines
+
+-- local moveline = require('moveline') -- NOTE: after I get moveline working, uncomment these
+-- vim.keymap.set('n', '∆', moveline.down)
+-- vim.keymap.set('v', '∆', moveline.block_down)
+-- vim.keymap.set('v', '˚', moveline.block_up)
+-- vim.keymap.set('n', '˚', moveline.up)
+
+--blocks of text to play with!
+--
+-- 1\   11  1111111   11111\   V|   VV  |II|  N\  /MI
+-- 222  22  22___    2     22  V\   VV   II   M MM MM
+-- 3  3V33  33ºº'    3    .33   V\  VV   II   M WW MM
+-- 4   \44  4444444   444444     VVVV   |II|  M    MM
+--
+-- 4   \44  4444444   444444     VVVV   |II|  M    MM
+-- 3  3V33  33ºº'    3    .33   V\  VV   II   M WW MM
+-- 222  22  22___    2     22  V\   VV   II   M MM MM
+-- 1\   11  1111111   11111\   V|   VV  |II|  N\  /MI
+--
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "*", "*zzzv")
+
+
+
 vim.keymap.set('n', '<Leader>L',
-  '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>',
+  function()
+    require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
+    require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets/vscode_snippets/" })
+  end,
   { desc = 'Hot reload LuaSnips' }
 )
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

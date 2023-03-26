@@ -1,10 +1,12 @@
-vim.cmd('filetype plugin indent on')
-vim.cmd('syntax enable')
-vim.cmd("let g:vimtex_view_method = 'sioyek'")
--- vim.cmd("let g:vimtex_matchparen_enabled = 0")
-vim.cmd("let g:matchup_override_vimtex = 1")
--- vim.cmd("let g:vimtex_syntax_enabled = 0")
-vim.cmd("let g:vimtex_syntax_conceal_disable = 1")
+vim.cmd([[
+filetype plugin indent on
+syntax enable
+let g:vimtex_view_method = 'sioyek'
+" vim.cmd("let g:vimtex_matchparen_enabled = 0")
+let g:matchup_override_vimtex = 1
+" vim.cmd("let g:vimtex_syntax_enabled = 0")
+let g:vimtex_syntax_conceal_disable = 1
+]])
 
 -- see https://github.com/lervag/vimtex/issues/2174,
 -- https://github.com/andymass/vim-matchup, and
@@ -12,16 +14,16 @@ vim.cmd("let g:vimtex_syntax_conceal_disable = 1")
 -- :help vimtex-nf-enhanced-matchparen
 -- :help g:vimtex_matchparen_enabled
 
-vim.keymap.set("n", "<localleader>vv", vim.cmd.VimtexView, { desc = '[V]imtex[V]iew' })
+
 
 vim.g.vimtex_quickfix_ignore_filters = {
-	'Underfull \\\\hbox',
-	'Overfull \\\\hbox',
-	'LaTeX Warning: .+ float specifier changed to',
-	'LaTeX hooks Warning',
-	'Package siunitx Warning: Detected the "physics" package:',
-	'Package hyperref Warning: Token not allowed in a PDF string',
-	'Package biblatex Warning: Using fall-back BibTeX(8) backend',
+  'Underfull \\\\hbox',
+  'Overfull \\\\hbox',
+  'LaTeX Warning: .+ float specifier changed to',
+  'LaTeX hooks Warning',
+  'Package siunitx Warning: Detected the "physics" package:',
+  'Package hyperref Warning: Token not allowed in a PDF string',
+  'Package biblatex Warning: Using fall-back BibTeX(8) backend',
 }
 -- " Or with a generic interface::
 -- vim.cmd("let g:vimtex_view_general_viewer = 'okular'")
@@ -39,6 +41,9 @@ vim.g.vimtex_quickfix_ignore_filters = {
 -- let uplocalleader = ","
 
 return {
-	'lervag/vimtex',
-	lazy = false,
+  'lervag/vimtex',
+  lazy = false,
+  config = function()
+    vim.keymap.set("n", "<localleader>vv", vim.cmd.VimtexView, { desc = '[V]imtex[V]iew' })
+  end
 }
