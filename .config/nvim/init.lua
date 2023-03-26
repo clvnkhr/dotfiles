@@ -29,11 +29,6 @@ vim.opt.foldlevelstart = 99
 vim.opt.winblend = 20
 vim.opt.pumblend = 20
 
-
-
-
-
-
 -- Install package manager,  https://github.com/folke/lazy.nvim, see `:help lazy.nvim.txt`
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -77,10 +72,13 @@ require('lazy').setup({
   -- Luasnip (Added to try to make snippets work?)
   {
     'L3MON4D3/LuaSnip',
+    lazy = false,
+    dependencies = { 'saadparwaiz1/cmp_luasnip', },
     config = function()
       -- Load snippets
-      require("luasnip.loaders.from_lua").load({ path = "~/.config/nvim/snippets/" }) -- added luasnip path
-      require("luasnip.loaders.from_vscode").load({ path = "~/.config/nvim/snippets/vscode_snippets" })
+      require("luasnip.loaders.from_lua").load({ path = "~/.config/nvim/snippets/" })
+      require("luasnip.loaders.from_vscode").load()
+      -- require("luasnip.loaders.from_vscode").load({ path = "~/.config/nvim/snippets/vscode_snippets" })
     end
   },
   {
@@ -104,6 +102,10 @@ require('lazy').setup({
         changedelete = { text = '≃' },
       },
     },
+    on_attach = function(buffer)
+      vim.keymap.set('n', '[c', require('gitsigns').prev_hunk, { buffer = buffer })
+      vim.keymap.set('n', ']c', require('gitsigns').next_hunk, { buffer = buffer })
+    end
   },
 
   {
@@ -647,21 +649,15 @@ vim.keymap.set('n', 'Ô', '"ayy"ap')          -- duplicate lines
 
 --blocks of text to play with!
 --
--- 1\   11  1111111   11111\   V|   VV  |II|  N\  /MI
--- 222  22  22___    2     22  V\   VV   II   M MM MM
--- 3  3V33  33ºº'    3    .33   V\  VV   II   M WW MM
--- 4   \44  4444444   444444     VVVV   |II|  M    MM
---
--- 4   \44  4444444   444444     VVVV   |II|  M    MM
--- 3  3V33  33ºº'    3    .33   V\  VV   II   M WW MM
--- 222  22  22___    2     22  V\   VV   II   M MM MM
--- 1\   11  1111111   11111\   V|   VV  |II|  N\  /MI
+-- 1\   11  1111111   11111\   V|   VV  |II|  N\  /MI       4   \44  4444444   444444     VVVV   |II|  M    MM
+-- 222  22  22___    2     22  V\   VV   II   M MM MM       3  3V33  33ºº'    3    .33   V\  VV   II   M WW MM
+-- 3  3V33  33ºº'    3    .33   V\  VV   II   M WW MM       222  22  22___    2     22  V\   VV   II   M MM MM
+-- 4   \44  4444444   444444     VVVV   |II|  M    MM       1\   11  1111111   11111\   V|   VV  |II|  N\  /MI
 --
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
-
 
 
 vim.keymap.set('n', '<Leader>L',
