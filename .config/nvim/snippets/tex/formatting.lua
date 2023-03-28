@@ -125,6 +125,8 @@ return {
   s(tbl4("^^"), fmta("^{<>}", { i(1) })),
   s(tbl4("\\\\"), t("\\\\ ")),
   s(tbl4("__"), fmta("_{<>}", { i(1) })),
+  s(tbl3("<~"), t("\\lesssim")),
+  s(tbl3(">~"), t("\\gtrsim")),
 
   s({ trig = "\\href" }, fmta(
     "\\href{<>}{<>}", {

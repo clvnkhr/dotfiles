@@ -12,7 +12,7 @@ Managed in this file:
 - luasnip
 - neovide options
 
-TODO: maybe inline theme and autodark, and put lualine with it?
+ TODO: maybe inline theme and autodark, and put lualine with it?
 
 lua guide: - https://learnxinyminutes.com/docs/lua/
 For translating between vimscript and lua, search through `:help lua-guide`
@@ -69,16 +69,16 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-  -- Luasnip (Added to try to make snippets work?)
+  -- CUSTOM : WIP : Luasnip and friendly snippets added here
   {
     'L3MON4D3/LuaSnip',
     lazy = false,
-    dependencies = { 'saadparwaiz1/cmp_luasnip', },
+    dependencies = { 'saadparwaiz1/cmp_luasnip', --[[ 'rafamadriz/friendly-snippets' ]] },
     config = function()
       -- Load snippets
-      require("luasnip.loaders.from_lua").load({ path = "~/.config/nvim/snippets/" })
-      require("luasnip.loaders.from_vscode").load()
-      -- require("luasnip.loaders.from_vscode").load({ path = "~/.config/nvim/snippets/vscode_snippets" })
+      require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" }) -- WARNING: path = "..." without s will silently fail!!!
+      -- require("luasnip.loaders.from_vscode").load()
+      require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets/vscode_snippets" })
     end
   },
   {
@@ -95,17 +95,20 @@ require('lazy').setup({
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '≃' },
+        add = { text = '✚' },
+        change = { text = '' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '' },
       },
+      yadm = {
+        enable = true
+      },
+      on_attach = function(buffer)
+        vim.keymap.set('n', '[c', require('gitsigns').prev_hunk, { buffer = buffer })
+        vim.keymap.set('n', ']c', require('gitsigns').next_hunk, { buffer = buffer })
+      end
     },
-    on_attach = function(buffer)
-      vim.keymap.set('n', '[c', require('gitsigns').prev_hunk, { buffer = buffer })
-      vim.keymap.set('n', ']c', require('gitsigns').next_hunk, { buffer = buffer })
-    end
   },
 
   {
@@ -664,6 +667,7 @@ vim.keymap.set('n', '<Leader>L',
   function()
     require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
     require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets/vscode_snippets/" })
+    print("Reloaded snippets")
   end,
   { desc = 'Hot reload LuaSnips' }
 )
