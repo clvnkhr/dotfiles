@@ -55,10 +55,10 @@ end
 return {
   s({ trig = "$", snippetType = "autosnippet" },
     fmta("\\(<>\\)<>", { i(1), i(0) })),
-  s(tbl1("\\["), fmta([[
-\[<>\]
-]], { i(1) })
-  ),
+  --   s(tbl1("\\["), fmta([[
+  -- \[<>\]
+  -- ]], { i(1) })
+  --   ),
   s(tbl1("beg"), fmta(envstr("<>"), { i(1), i(2), rep(1) })),
   s(tbl1("eq"), fmta(envstr2("equation", "eq"), { i(1), i(2) })),
   s(tbl1("al"), fmta(envstr2("align", "eq"), { i(1), i(2) })),

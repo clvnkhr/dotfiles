@@ -88,6 +88,11 @@ local function toggle_texifier_darkmode()
 	-- end
 end
 
+local function focus_latex_editor()
+	hs.application.launchOrFocus("sioyek")
+	hs.application.launchOrFocus("iTerm")
+end
+
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "M", print_mouse_pos)
 print("hotkey runs     print_mouse_pos")
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "A", print_attr_at_mouse_pos)
@@ -95,6 +100,8 @@ print("hotkey runs     print_attr_at_mouse_pos")
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "I", print_ctrd_ui_coords_under_mouse)
 print("hotkey runs     print_ctrd_ui_coords_under_mouse")
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "T", toggle_texifier_darkmode)
+print("hotkey runs toggle_texifier_darkmode")
+hs.hotkey.bind({ "cmd", "alt" }, "tab", focus_latex_editor)
 print("hotkey runs toggle_texifier_darkmode")
 -- -- --------------------------------------------------------------------------
 -- --

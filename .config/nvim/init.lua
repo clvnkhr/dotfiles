@@ -123,7 +123,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        -- theme = 'onedark',
+        theme = 'auto',
         component_separators = '󱐋',
         section_separators = { left = '', right = '' },
       },
@@ -644,11 +644,10 @@ vim.keymap.set('v', '∆', '"ad<esc>"ap`[V`]') -- in visual line mode.
 vim.keymap.set('n', '', '"ayy"aP')         -- option k; note that this deletes lines at the top of the text!
 vim.keymap.set('n', 'Ô', '"ayy"ap')          -- duplicate lines
 
--- local moveline = require('moveline') -- NOTE: after I get moveline working, uncomment these
--- vim.keymap.set('n', '∆', moveline.down)
--- vim.keymap.set('v', '∆', moveline.block_down)
--- vim.keymap.set('v', '˚', moveline.block_up)
--- vim.keymap.set('n', '˚', moveline.up)
+--quick save button and buffer close
+vim.keymap.set('n', 'œ', ':bd<CR>') -- option Q
+vim.keymap.set('n', '∑', ':w<CR>') -- option W
+
 
 --blocks of text to play with!
 --

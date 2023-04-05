@@ -11,12 +11,14 @@ return {
       require("onedarkpro").setup({
         colors = {
           onedark = {
-            bg = "#332A1A",
-            color_column = "#372f24" -- this colors inactive windows.
+            bg           = "#332A1A",
+            color_column = "#372f24", -- this colors inactive windows.
           },
-          -- onelight = {
-          --   bg = "#00FF00" -- green
-          -- }
+          onelight = {
+            git_change = "#F8B600",
+            git_add    = "#6CFF75",
+            git_delete = "#FF7A77",
+          }
         },
         options = {
           highlight_inactive_windows = true,
@@ -38,10 +40,12 @@ return {
         set_dark_mode = function()
           -- vim.api.nvim_set_option('background', 'dark')
           vim.cmd('colorscheme onedark')
+          require 'lualine'.setup { options = { theme = require 'lualine.themes.onedark' } }
         end,
         set_light_mode = function()
           vim.api.nvim_set_option('background', 'light')
           vim.cmd('colorscheme onelight')
+          require 'lualine'.setup { options = { theme = require 'lualine.themes.onelight' } }
         end,
       })
       auto_dark_mode.init()
