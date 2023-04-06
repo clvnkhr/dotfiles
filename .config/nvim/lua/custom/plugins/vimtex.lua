@@ -44,6 +44,6 @@ return {
   'lervag/vimtex',
   lazy = false,
   config = function()
-    vim.keymap.set("n", "<localleader>vv", vim.cmd.VimtexView, { desc = '[V]imtex[V]iew' })
+    vim.keymap.set("n", "√", vim.cmd.VimtexView, { desc = '[V]iew' }) --NOTE: √ is option V
   end
 }

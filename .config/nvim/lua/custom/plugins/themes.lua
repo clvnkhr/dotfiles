@@ -20,6 +20,14 @@ return {
             git_delete = "#FF7A77",
           }
         },
+        highlights = {
+          ["@nospell"] = { link = "String" },
+          ["@text.math"] = { fg = "${purple}" },
+          ["@punctuation.bracket"] = { fg = "${git_delete}" },
+          ["@punctuation.special"] = { style = "bold" },
+          ["@punctuation.delimiter"] = { style = "bold" },
+          -- ["@function.macro"] = { style = "bold" },
+        },
         options = {
           highlight_inactive_windows = true,
           cursorline = true

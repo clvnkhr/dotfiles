@@ -234,7 +234,7 @@ vim.o.termguicolors = true
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -291,7 +291,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'latex' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
+  auto_install = true,
 
   highlight = { enable = true },
   rainbow = {
@@ -447,10 +447,13 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   texlab = {
-    symbols = {
-      ignoredPatterns = { "\\" }, -- todo: fix this, and then remove the \\ stopgap in the snippet
-    },
-  },                              -- https://github.com/latex-lsp/texlab/wiki/Configuration
+    -- symbols = {
+    --   ignoredPatterns = { "\\" }, -- TODO: fix this, and then remove the \\ stopgap in the snippet
+    -- },
+    latexindent = {
+      modifyLineBreaks = true
+    }
+  }, -- https://github.com/latex-lsp/texlab/wiki/Configuration
   rust_analyzer = {},
   -- tsserver = {},
   lua_ls = {
