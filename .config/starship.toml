@@ -1,0 +1,135 @@
+command_timeout = 1000
+
+[aws]
+symbol = "  aws"
+
+[buf]
+symbol = " buf"
+
+[c]
+symbol = " conda"
+
+[conda]
+symbol = " dart"
+
+[dart]
+symbol = " dart"
+
+[directory]
+read_only = " dir"
+
+[docker_context]
+symbol = " docker_context"
+
+[elixir]
+symbol = " elixir"
+
+[elm]
+symbol = " elm"
+
+[fossil_branch]
+symbol = " fossil_branch "
+
+[git_branch]
+symbol = " git_branch "
+
+[golang]
+symbol = " golang"
+
+[guix_shell]
+symbol = " guix_shell"
+
+[haskell]
+symbol = " haskell"
+
+[haxe]
+symbol = "⌘ haxe"
+
+[hg_branch]
+symbol = " hg_branch "
+
+[java]
+symbol = " java"
+
+[julia]
+symbol = " julia"
+
+[lua]
+symbol = " lua"
+
+[memory_usage]
+symbol = " mem_usage"
+
+[meson]
+symbol = "喝 meson"
+
+[nim]
+symbol = " nim"
+
+[nix_shell]
+symbol = " nix_shell"
+
+[nodejs]
+symbol = " nodejs"
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "﯑ "
+Gentoo = " "
+HardenedBSD = "ﲊ "
+Illumos = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = " "
+openSUSE = " "
+OracleLinux = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+Solus = "ﴱ "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
+
+[package]
+symbol = " package"
+
+[pijul_channel]
+symbol = "🪺 pijul_channel"
+
+[python]
+symbol = " rlang"
+
+[rlang]
+symbol = "ﳒ rlang"
+
+[ruby]
+symbol = " ruby"
+
+[rust]
+symbol = " rust"
+
+[scala]
+symbol = " scala"
+
+[spack]
+symbol = "🅢 spack"
