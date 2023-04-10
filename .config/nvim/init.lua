@@ -421,7 +421,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>sd', vim.lsp.buf.signature_help, '[S]ignature [D]ocumentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -644,8 +644,8 @@ vim.keymap.set('n', '∆', '"add"ap')
 vim.keymap.set('v', '˚', '"ad<esc>k"aP`[V`]') -- only use these two when
 vim.keymap.set('v', '∆', '"ad<esc>"ap`[V`]') -- in visual line mode.
 
-vim.keymap.set('n', '', '"ayy"aP')         -- option k; note that this deletes lines at the top of the text!
-vim.keymap.set('n', 'Ô', '"ayy"ap')          -- duplicate lines
+-- vim.keymap.set('n', '', '"ayy"aP')         -- option k; note that this deletes lines at the top of the text!
+-- vim.keymap.set('n', 'Ô', '"ayy"ap')          -- duplicate lines
 
 --quick save button and buffer close
 vim.keymap.set('n', 'œ', ':bd<CR>') -- option Q
@@ -663,6 +663,7 @@ vim.keymap.set('n', '∑', ':w<CR>') -- option W
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
+vim.keymap.set("n", "<leader>W", "<cmd>set wrap!<CR>", { desc = 'toggle [W]ordwrap' })
 
 
 vim.keymap.set('n', '<Leader>L',
@@ -673,6 +674,70 @@ vim.keymap.set('n', '<Leader>L',
   end,
   { desc = 'Hot reload LuaSnips' }
 )
+-- Remap Control + H / J / K / L to move between windows
+--
+-- NORMAL MODE
+vim.api.nvim_set_keymap('n', '<C-H>', '<C-W>h', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-J>', '<C-W>j', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-K>', '<C-W>k', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-L>', '<C-W>l', { noremap = true })
+-- Remap Control + H and Control + L to cycle through windows
+-- vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>W', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>w', { noremap = true })
+
+-- TERMINAL MODE
+vim.api.nvim_set_keymap('t', '<C-H>', ' <C-\\><C-N><C-W>h', { noremap = true })
+vim.api.nvim_set_keymap('t', '<C-J>', ' <C-\\><C-N><C-W>j', { noremap = true })
+vim.api.nvim_set_keymap('t', '<C-K>', '<C-\\><C-N><C-W>k', { noremap = true })
+vim.api.nvim_set_keymap('t', '<C-L>', '<C-W>l', { noremap = true })
+-- Remap Control + H and Control + L to cycle through windows
+-- vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-N><C-w>W', { noremap = true })
+-- vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-N><C-w>w', { noremap = true })
+
+-- INSERT MODE
+vim.api.nvim_set_keymap('i', '<C-H>', ' <C-\\><C-N><C-W>h', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-J>', ' <C-\\><C-N><C-W>j', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-K>', '<C-\\><C-N><C-W>k', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-L>', '<C-W>l', { noremap = true })
+-- Remap Control + H and Control + L to cycle through windows
+-- vim.api.nvim_set_keymap('i', '<C-h>', '<C-\\><C-N><C-w>W', { noremap = true })
+-- vim.api.nvim_set_keymap('i', '<C-l>', '<C-\\><C-N><C-w>w', { noremap = true })
+
+-- Commands for making splits
+vim.api.nvim_set_keymap('n', 'Ó', '<C-W>v', { noremap = true })      -- altshift h
+vim.api.nvim_set_keymap('n', 'Ò', '<C-W>v<C-W>l', { noremap = true }) -- altshift l
+vim.api.nvim_set_keymap('n', '', '<C-W>s', { noremap = true })     -- altshift k
+vim.api.nvim_set_keymap('n', 'Ô', '<C-W>s<C-W>j', { noremap = true }) -- altshift j
+
+-- entering and exiting terminal
+vim.api.nvim_set_keymap('n', '<C-T>', '<cmd>terminal<cr>', { noremap = true })
+vim.api.nvim_set_keymap('t', "<Esc>", "<C-\\><C-n>", { noremap = true })
+
+-- resizing windows
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]])   -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]])   -- make the window smaller vertically
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+
+-- -- persistent folds across sessions ;
+-- -- doesn't seem to work because it interferes with all sorts of different buffers
+-- -- https://til.hashrocket.com/posts/17c44eda91-persistent-folds-between-vim-sessions
+-- vim.cmd [[
+-- augroup AutoSaveFolds
+--   autocmd!
+--   autocmd BufWinLeave * mkview
+--   autocmd BufWinEnter * silent loadview
+-- augroup END
+-- ]]
+--
+--
+vim.api.nvim_set_keymap('n', '<leader>dg', '<cmd>diffget<cr>', { desc = "[D]iff[G]et" })
+-- see `:help diffget`
+
+vim.api.nvim_set_keymap('n', '<leader>dvo', '<cmd>DiffviewOpen<cr>', { desc = "[D]iff[V]iew[O]pen" })
+vim.api.nvim_set_keymap('n', '<leader>dvc', '<cmd>DiffviewClose<cr>', { desc = "[D]iff[V]iew[C]lose" })
+
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

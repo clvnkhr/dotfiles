@@ -22,8 +22,7 @@ end
 
 local function envstr2(envname, labelprefix)
   return [[
-\begin{]] .. envname .. [[}
-  \label{]] .. labelprefix .. [[:<>}
+\begin{]] .. envname .. [[}\label{]] .. labelprefix .. [[:<>}
   <>
 \end{]] .. envname .. [[}
 ]]

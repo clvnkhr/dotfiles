@@ -1,9 +1,20 @@
 -- " set nocursorline
 -- " set nornu
 -- " let g:loaded_matchparen=1
-vim.cmd('au InsertLeave *.tex execute "w"')
+vim.cmd('au InsertLeave *.tex execute "w"') -- autosave on exiting w
 -- " highlight @nospell guifg = red
 -- highlight @text.math guifg = purple
 --
 -- vim.api.nvim_set_hl(0, '@nospell', { fg = "#ff7a77",italic = true })
 -- vim.api.nvim_set_hl(0, '@text.math', { fg = "#ffffff", bg = "#333333", italic = true })
+--
+-- require("onedarkpro").setup({
+-- 	highlights = {
+-- 		["@nospell.latex"] = { link = "String" },
+-- 		["@text.math.latex"] = { fg = "${purple}" },
+-- 		["@punctuation.bracket.latex"] = { fg = "${git_delete}" },
+-- 		["@punctuation.special.latex"] = { style = "bold" },
+-- 		["@punctuation.delimiter.latex"] = { style = "bold" },
+-- 		-- ["@function.macro"] = { style = "bold" },
+-- 	},
+-- })

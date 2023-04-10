@@ -21,11 +21,11 @@ return {
           }
         },
         highlights = {
-          ["@nospell"] = { link = "String" },
-          ["@text.math"] = { fg = "${purple}" },
-          ["@punctuation.bracket"] = { fg = "${git_delete}" },
-          ["@punctuation.special"] = { style = "bold" },
-          ["@punctuation.delimiter"] = { style = "bold" },
+          ["@nospell.latex"] = { link = "String" },
+          ["@text.math.latex"] = { fg = "${purple}" },
+          ["@punctuation.bracket.latex"] = { fg = "${git_delete}" },
+          ["@punctuation.special.latex"] = { style = "bold" },
+          ["@punctuation.delimiter.latex"] = { style = "bold" },
           -- ["@function.macro"] = { style = "bold" },
         },
         options = {

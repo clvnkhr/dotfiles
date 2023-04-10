@@ -7,10 +7,23 @@ indentRules:
    chapter: " "
    section: " "
    item: "    "
-   myitem: "        "
+   myitem: "    "
 
 modifyLineBreaks:
     oneSentencePerLine:
         manipulateSentences: 1
         sentencesFollow:
             blankLine: 0
+
+lookForAlignDelims:
+    tabular: 
+        alignRowsWithoutMaxDelims: 0
+        dontMeasure: largest
+    align:
+        alignRowsWithoutMaxDelims: 0
+        dontMeasure: largest
+    aligned:
+        alignRowsWithoutMaxDelims: 0
+        dontMeasure: largest
+
+
