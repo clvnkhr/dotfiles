@@ -2,7 +2,7 @@ return {
   {
     'romgrk/barbar.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
-    -- priority = 0,
+    lazy = false,
     config = function()
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
@@ -110,6 +110,8 @@ return {
       vim.o.termguicolors = true
       vim.notify = require("notify")
       require("telescope").load_extension("notify")
+      vim.api.nvim_set_keymap('n', '<leader>x', '<cmd>lua vim.notify.dismiss()<cr>',
+        { noremap = true, desc = 'dismiss notifications' })
       -- require("notify")("My super important message")
     end
   },

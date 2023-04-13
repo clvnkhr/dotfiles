@@ -28,7 +28,7 @@ return {
 
       npairs.add_rules { Rule("\\[", "\\]", "tex") }
       npairs.add_rules { Rule("\\(", "\\)", "tex") }
-      npairs.add_rules { Rule("\\|", "\\|", "tex") }
+      -- npairs.add_rules { Rule("\\|", "\\|", "tex") }
       npairs.add_rules { Rule("\\langle", "\\rangle", "tex") }
     end
   }

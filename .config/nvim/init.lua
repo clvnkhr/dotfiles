@@ -421,7 +421,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<leader>sd', vim.lsp.buf.signature_help, '[S]ignature [D]ocumentation')
+  nmap('<leader>sd', vim.lsp.buf.signature_help, '[S]ignature [Dgocumentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -651,6 +651,11 @@ vim.keymap.set('v', '∆', '"ad<esc>"ap`[V`]') -- in visual line mode.
 vim.keymap.set('n', 'œ', ':bd<CR>') -- option Q
 vim.keymap.set('n', '∑', ':w<CR>') -- option W
 
+-- common commands while in insert mode
+vim.api.nvim_set_keymap('i', '„', '<C-O>W', { noremap = true })
+vim.api.nvim_set_keymap('i', 'ı', '<C-O>B', { noremap = true })
+vim.api.nvim_set_keymap('i', '∑', '<C-O>w', { noremap = true })
+vim.api.nvim_set_keymap('i', '∫', '<C-O>b', { noremap = true })
 
 --blocks of text to play with!
 --

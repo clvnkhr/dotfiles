@@ -52,8 +52,12 @@ end
 
 -- influenced by https://github.com/tiagovla/.dotfiles/blob/master/neovim/.config/nvim/lua/plugins/modules/luasnip/snips/tex.lua#L107
 return {
+  s({ trig = "||", snippetType = "autosnippet" },
+    fmta("\\lvert<>\\rvert", { i(1) })),
+  s({ trig = "\\|", snippetType = "autosnippet" },
+    fmta("\\lVert<>\\rVert", { i(1) })),
   s({ trig = "$", snippetType = "autosnippet" },
-    fmta("\\(<>\\)<>", { i(1), i(0) })),
+    fmta("\\(<>\\)", { i(1) })),
   --   s(tbl1("\\["), fmta([[
   -- \[<>\]
   -- ]], { i(1) })
