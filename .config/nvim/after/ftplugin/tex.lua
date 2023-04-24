@@ -1,20 +1,10 @@
 -- " set nocursorline
 -- " set nornu
 -- " let g:loaded_matchparen=1
-vim.cmd('au InsertLeave *.tex execute "w"') -- autosave on exiting w
--- " highlight @nospell guifg = red
--- highlight @text.math guifg = purple
---
--- vim.api.nvim_set_hl(0, '@nospell', { fg = "#ff7a77",italic = true })
--- vim.api.nvim_set_hl(0, '@text.math', { fg = "#ffffff", bg = "#333333", italic = true })
---
--- require("onedarkpro").setup({
--- 	highlights = {
--- 		["@nospell.latex"] = { link = "String" },
--- 		["@text.math.latex"] = { fg = "${purple}" },
--- 		["@punctuation.bracket.latex"] = { fg = "${git_delete}" },
--- 		["@punctuation.special.latex"] = { style = "bold" },
--- 		["@punctuation.delimiter.latex"] = { style = "bold" },
--- 		-- ["@function.macro"] = { style = "bold" },
--- 	},
--- })
+vim.cmd('au InsertLeave *.tex execute "w"')                       -- autosave on exiting w
+vim.keymap.set("n", "√", vim.cmd.VimtexView, { desc = '[V]iew' }) --NOTE: √ is option V
+vim.cmd [[menu 500 PopUp.Find\ in\ PDF\ (Opt-V)  :VimtexView<CR>]]
+
+vim.keymap.set("n", "<localleader>f",
+	[[<cmd>:lua vim.lsp.buf.format{timeout_ms = 10000}<cr><cmd>:w<cr><cmd>:lua print('Formatted')<cr>]],
+	{ desc = '[F]ormat' })

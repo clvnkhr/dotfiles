@@ -45,5 +45,6 @@ return {
   lazy = false,
   config = function()
     vim.keymap.set("n", "√", vim.cmd.VimtexView, { desc = '[V]iew' }) --NOTE: √ is option V
+    vim.cmd [[menu 500 PopUp.Find\ in\ PDF\ (Opt-V)  :VimtexView<CR>]]
   end
 }

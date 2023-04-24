@@ -50,6 +50,10 @@ return {
           return
         end
 
+        if client.name == 'texlab' then
+          return
+        end
+
         -- Create an autocmd that will run *before* we save the buffer.
         --  Run the formatting command for the LSP that has just attached.
         vim.api.nvim_create_autocmd('BufWritePre', {
@@ -65,6 +69,7 @@ return {
               filter = function(c)
                 return c.id == client.id
               end,
+              timeout_ms = 5000
             }
           end,
         })

@@ -5,9 +5,10 @@ Modified from Kickstart.nvim (https://github.com/nvim-lua/kickstart.nvim)
 Managed in this file:
 - various variables and keybindings
 - lazy.nvim
-- telescope
-- treesitter
-- mason (languages)
+- telescope: fuzzy file finder
+- treesitter: syntax tree
+- lspconfig: lsp for autocomplete etc
+- mason: installer for lsps, linters, etc
 - lualine
 - luasnip
 - neovide options
@@ -185,7 +186,7 @@ require('lazy').setup({
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   require 'kickstart.plugins.autoformat',
-  require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
@@ -288,7 +289,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'latex' },
+  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'latex', 'perl' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -421,7 +422,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<leader>sd', vim.lsp.buf.signature_help, '[S]ignature [Dgocumentation')
+  nmap('<leader>sd', vim.lsp.buf.signature_help, '[S]ignature [D]ocumentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -451,9 +452,11 @@ local servers = {
     --   ignoredPatterns = { "\\" }, -- TODO: fix this, and then remove the \\ stopgap in the snippet
     -- },
     latexindent = {
-      modifyLineBreaks = true
-    }
+      -- modifyLineBreaks = true
+    },
+    -- cmd = { "texlab", "-vvvv", "--log-file=tmp/texlab.log" },
   }, -- https://github.com/latex-lsp/texlab/wiki/Configuration
+  ltex = {},
   rust_analyzer = {},
   -- tsserver = {},
   lua_ls = {
@@ -742,7 +745,12 @@ vim.api.nvim_set_keymap('n', '<leader>dg', '<cmd>diffget<cr>', { desc = "[D]iff[
 vim.api.nvim_set_keymap('n', '<leader>dvo', '<cmd>DiffviewOpen<cr>', { desc = "[D]iff[V]iew[O]pen" })
 vim.api.nvim_set_keymap('n', '<leader>dvc', '<cmd>DiffviewClose<cr>', { desc = "[D]iff[V]iew[C]lose" })
 
+vim.cmd [[ "unmenu options
+aunmenu PopUp.How-to\ disable\ mouse
+aunmenu PopUp.-1-
+menu 500 PopUp.Save  :w<CR>
+]]
 
-
+-- vim.lsp.set_log_level("TRACE")
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

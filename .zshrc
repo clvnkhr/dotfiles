@@ -17,6 +17,7 @@ alias ls="exa"
 alias wifiname="/Sy*/L*/Priv*/Apple8*/V*/C*/R*/airport -I | sed -n 's/^.*SSID: \(.*\)$/\1/p'"
 alias wifipass="security find-generic-password -wa"
 alias z="zoxide"
+eval "$(zoxide init zsh)"
 
 alias cd-dropboxlatex="cd /Users/calvinkhor/Library/Mobile\ Documents/com\~apple\~CloudDocs/Dropbox\ LaTeX"
 alias cd-Github="~/Documents/Github/"
@@ -24,4 +25,5 @@ alias cd-Github="~/Documents/Github/"
 eval "$(starship init zsh)"
 eval "$(rtx activate zsh)"
 export NEOVIDE_MULTIGRID="true"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-20.jdk/Contents/Home"
 # source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh # it looks like oh-my-zsh just kinda sucks? why cant it find this. Oh, the instructions are to clone the repo myself. Probably should switch to idk, antidote

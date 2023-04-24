@@ -90,7 +90,7 @@ end
 
 local function focus_latex_editor()
 	hs.application.launchOrFocus("sioyek")
-	hs.application.launchOrFocus("iTerm")
+	hs.application.launchOrFocus("WezTerm")
 end
 
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "M", print_mouse_pos)

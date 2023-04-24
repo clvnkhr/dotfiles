@@ -8,3 +8,5 @@
 	email = calvin_khor@hotmail.com
 [init]
 	defaultBranch = master
+[push]
+	default = current

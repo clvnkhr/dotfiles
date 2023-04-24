@@ -2,6 +2,7 @@ return {
   "seandewar/killersheep.nvim",
   'ThePrimeagen/vim-be-good',
   "rktjmp/shenzhen-solitaire.nvim",
+  "alec-gibson/nvim-tetris",
   {
     "jim-fx/sudoku.nvim",
     -- dependencies = "" -- NOTE: add onedark as dependency?
