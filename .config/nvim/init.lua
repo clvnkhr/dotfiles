@@ -127,6 +127,7 @@ require('lazy').setup({
         theme = 'auto',
         component_separators = '󱐋',
         section_separators = { left = '', right = '' },
+        disabled_filetypes = { 'neo-tree' },
       },
       sections = {
         lualine_c = { 'filename', "vim.g['metals_status']" },
@@ -750,7 +751,7 @@ aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
 menu 500 PopUp.Save  :w<CR>
 ]]
-
+vim.cmd [[ :set scrolloff=5 ]]
 -- vim.lsp.set_log_level("TRACE")
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

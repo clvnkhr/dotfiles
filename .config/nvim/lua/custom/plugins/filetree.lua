@@ -23,8 +23,8 @@ return {
     require('neo-tree').setup {
       {
         source_selector = {
-          winbar = true,
-          statusline = true,
+          winbar = true,             -- TODO: understand why this doesn't work
+          statusline = true,         -- TODO: understand why this doesn't work
         },
         close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
