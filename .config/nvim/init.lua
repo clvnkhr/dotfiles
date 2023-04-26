@@ -457,7 +457,13 @@ local servers = {
     },
     -- cmd = { "texlab", "-vvvv", "--log-file=tmp/texlab.log" },
   }, -- https://github.com/latex-lsp/texlab/wiki/Configuration
-  ltex = {},
+  ltex = {
+    settings = {
+      ltex = {
+        language = "en-GB",
+      },
+    },
+  },
   rust_analyzer = {},
   -- tsserver = {},
   lua_ls = {

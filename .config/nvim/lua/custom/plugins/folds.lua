@@ -1,4 +1,4 @@
--- vim.o.foldcolumn = '0'
+vim.o.foldcolumn = '1'
 -- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 -- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 return {
