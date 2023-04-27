@@ -24,6 +24,19 @@ alias cd-Github="~/Documents/Github/"
 
 eval "$(starship init zsh)"
 eval "$(rtx activate zsh)"
+
+# yadm into gitui
+function yc() {
+    cd ~
+    yadm enter gitui
+    cd -
+}
+
+alias tldrf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-window=right,70% | xargs tldr'
+
+export EDITOR=nvim
+export VISUAL="$EDITOR"
+
 export NEOVIDE_MULTIGRID="true"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-20.jdk/Contents/Home"
 # source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh # it looks like oh-my-zsh just kinda sucks? why cant it find this. Oh, the instructions are to clone the repo myself. Probably should switch to idk, antidote

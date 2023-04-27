@@ -45,9 +45,8 @@ end
 local function inactive_tab_autodark(appearance)
 	if appearance:find 'Dark' then
 		return {
-			bg_color = '#3b3052',
-			fg_color = '#909090',
-			italic = true,
+			bg_color = '#1b1032',
+			fg_color = '#808080',
 		}
 	else
 		return {
@@ -61,8 +60,9 @@ end
 local function active_tab_autodark(appearance)
 	if appearance:find 'Dark' then
 		return {
-			bg_color = '#1b1032',
-			fg_color = '#808080',
+			bg_color = '#3b3052',
+			fg_color = '#909090',
+			italic = true,
 		}
 	else
 		return {
