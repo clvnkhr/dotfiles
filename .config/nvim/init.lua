@@ -214,10 +214,14 @@ vim.o.mouse = 'a'            -- Enable mouse mode
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
+-- :set nolist wrap linebreak
 vim.o.breakindent = true -- Enable break indent
-vim.o.undofile = true    -- Save undo history. see also ./lua/custom/plugin/undotree.lua
+vim.o.linebreak = true
+vim.o.showbreak = "▶︎"
 
-vim.o.ignorecase = true  -- Case insensitive searching UNLESS /C or capital in search
+vim.o.undofile = true   -- Save undo history. see also ./lua/custom/plugin/undotree.lua
+
+vim.o.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
 vim.o.smartcase = true
 
 vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default
@@ -458,11 +462,17 @@ local servers = {
     -- cmd = { "texlab", "-vvvv", "--log-file=tmp/texlab.log" },
   }, -- https://github.com/latex-lsp/texlab/wiki/Configuration
   ltex = {
-    settings = {
-      ltex = {
-        language = "en-GB",
-      },
+    ltex = {
+      language = "en-GB",
+      disabledRules = {
+        en = { "OXFORD_SPELLING_Z_NOT_S" } -- TODO: this doesn't work. Why?
+      }
     },
+    -- settings = {
+    --   ltex = {
+    --     language = "en-GB",
+    --   },
+    -- },
   },
   rust_analyzer = {},
   -- tsserver = {},

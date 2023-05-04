@@ -39,4 +39,22 @@ export VISUAL="$EDITOR"
 
 export NEOVIDE_MULTIGRID="true"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-20.jdk/Contents/Home"
+export CC=gcc-12
+    # INFO: this gcc is more recent than the system one. Needed for compiling treesitter for neorg
+
+alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
+
+function nvims() {
+    items=("default" "AstroNvim")
+    config=$(printf "%s\n" "${items[@]}" | fzf --prompt="Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+    if [[ -z $config ]]; then 
+        echo "Nothing selected" 
+        return 0
+    elif [[ $config = "default" ]]; then
+        config="" 
+    fi
+    NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
 # source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh # it looks like oh-my-zsh just kinda sucks? why cant it find this. Oh, the instructions are to clone the repo myself. Probably should switch to idk, antidote
