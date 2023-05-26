@@ -3,9 +3,9 @@ return {
 	--  You can configure plugins using the `config` key.
 	--  You can also configure plugins after the setup call,
 	--    as they will be available in your neovim runtime.
-	'tpope/vim-fugitive', -- Git related plugins
-	'tpope/vim-rhubarb',
-	'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+	{ 'tpope/vim-fugitive', cmd = "Git" },   -- Git related plugins
+	{ 'tpope/vim-rhubarb',  event = "BufReadPre" }, -- Git related plugins
+	{ 'tpope/vim-sleuth',   event = "BufReadPre" }, -- Git related plugins
 
 	-- LSP related plugins:
 	-- configuration is done below. Search for lspconfig to find configs.
@@ -45,10 +45,11 @@ return {
 		-- end
 	},
 	-- Useful plugin to show you pending keybinds.
-	{ 'folke/which-key.nvim',  opts = {}, lazy = false },
+	{ 'folke/which-key.nvim',  opts = {}, event = "VeryLazy" },
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
+		event = "VeryLazy",
 		opts = {
 			-- See `:help gitsigns.txt`
 			signs = {
@@ -61,13 +62,13 @@ return {
 			yadm = {
 				enable = true
 			},
-			on_attach = function(buffer)
+			on_attach = function(bufnr)
 				vim.keymap.set('n', '[c', require('gitsigns').prev_hunk,
 					{ buffer = bufnr, desc = 'Go to Previous Hunk' })
 				vim.keymap.set('n', ']c', require('gitsigns').next_hunk,
 					{ buffer = bufnr, desc = 'Go to Next Hunk' })
-				vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
-					{ buffer = bufnr, desc = '[P]review [H]unk' })
+				vim.keymap.set('n', '<leader>1', require('gitsigns').preview_hunk,
+					{ buffer = bufnr, desc = 'Hunks' })
 			end
 		},
 	},
@@ -97,9 +98,8 @@ return {
 	},
 
 	{
-		-- Add indentation guides even on blank lines
 		'lukas-reineke/indent-blankline.nvim',
-		-- Enable `lukas-reineke/indent-blankline.nvim`
+		event = "BufReadPre",
 		-- See `:help indent_blankline.txt`
 		opts = {
 			char = '┇',
@@ -110,7 +110,7 @@ return {
 	},
 
 	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim', opts = {}, },
+	{ 'numToStr/Comment.nvim', opts = {}, event = "BufReadPre" },
 	-- { 'numToStr/Comment.nvim', opts = { toggler = { line = 'gcc', block = 'gbc' }, } },
 
 	-- Fuzzy Finder (files, lsp, etc)

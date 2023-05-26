@@ -1,9 +1,9 @@
 return {
-  { "HiPhish/nvim-ts-rainbow2", event = "VeryLazy" },
+  { "HiPhish/nvim-ts-rainbow2", event = "BufReadPre" },
   -- setup: see https://github.com/HiPhish/nvim-ts-rainbow2
   {
     "RRethy/vim-illuminate",
-    event = "VeryLazy",
+    event = "BufReadPre",
   },
   -- {
   --   -- sentiment.nvim: Enhanced matchparen.vim plugin for Neovim to highlight the outer pair.

@@ -10,4 +10,6 @@ let g:yadm_git_default_git_path = "git"
   ]]
 return {
   "seanbreckenridge/yadm-git.vim",
+  event = "BufReadPre",
+  dependencies = { 'tpope/vim-fugitive' },
 }

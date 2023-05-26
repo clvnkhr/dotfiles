@@ -3,7 +3,7 @@ return {
 		'romgrk/barbar.nvim',
 		-- cond = false,
 		dependencies = 'nvim-tree/nvim-web-devicons',
-		event = "VeryLazy",
+		event = "BufReadPre",
 		-- lazy = false,
 		config = function()
 			local map = vim.api.nvim_set_keymap
@@ -135,6 +135,7 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
+		event = "BufReadPre",
 		config = function()
 			vim.keymap.set("n", "<leader>q", "<cmd>Trouble<cr>")
 		end

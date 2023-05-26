@@ -1,5 +1,6 @@
 return {
   -- cond = false,
+  event = "BufReadPre",
   "utilyre/barbecue.nvim",
   name = "barbecue",
   version = "*",

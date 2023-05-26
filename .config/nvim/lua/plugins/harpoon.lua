@@ -1,3 +1,4 @@
 return {
-  "ThePrimeagen/harpoon"
+  "ThePrimeagen/harpoon",
+  event = "BufReadPre"
 }

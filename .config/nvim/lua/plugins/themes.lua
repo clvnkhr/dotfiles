@@ -3,9 +3,10 @@ return {
   -- "Shatur/neovim-ayu",
   -- "ellisonleao/gruvbox.nvim",
   -- 'navarasu/onedark.nvim',
-  { "catppuccin/nvim", name = "catppuccin", enabled = false },
+  { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000, },
   {
     'olimorris/onedarkpro.nvim',
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -38,7 +39,7 @@ return {
   },
   {
     'f-person/auto-dark-mode.nvim',
-    priority = 1000,
+    priority = 2000,
     lazy = false,
     -- see https://github.com/f-person/auto-dark-mode.nvim if i wanna figure out how to make it auto? It seems to work just fine at startup for now.
     config = function()
@@ -48,12 +49,12 @@ return {
         -- update_interval = 1000,
         set_dark_mode = function()
           -- vim.api.nvim_set_option('background', 'dark')
-          vim.cmd('colorscheme onedark')
+          vim.cmd('colorscheme catppuccin-frappe')
           require 'lualine'.setup { options = { theme = require 'lualine.themes.onedark' } }
         end,
         set_light_mode = function()
           vim.api.nvim_set_option('background', 'light')
-          vim.cmd('colorscheme onelight')
+          vim.cmd('colorscheme catppuccin-latte')
           require 'lualine'.setup { options = { theme = require 'lualine.themes.onelight' } }
         end,
       })

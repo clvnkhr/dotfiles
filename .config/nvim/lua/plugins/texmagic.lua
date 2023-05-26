@@ -1,3 +1,4 @@
 return {
-  "jakewvincent/texmagic.nvim"
+  "jakewvincent/texmagic.nvim",
+  ft = { "tex", "bib" }
 }

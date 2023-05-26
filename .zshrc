@@ -42,12 +42,13 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-20.jdk/Contents/Home
 export CC=gcc-12
     # INFO: this gcc is more recent than the system one. Needed for compiling treesitter for neorg
 
-alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-alias nvim-astro="NVIM_APPNAME=KickstartNvim nvim"
+alias astronvim="NVIM_APPNAME=AstroNvim nvim"
+alias kickstartnvim="NVIM_APPNAME=KickstartNvim nvim"
+alias nvchad="NVIM_APPNAME=NvChad nvim"
 
 
 function nvims() {
-    items=("default" "AstroNvim" "KickstartNvim")
+    items=("default" "AstroNvim" "KickstartNvim" "NvChad")
     config=$(printf "%s\n" "${items[@]}" | fzf --prompt="Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
     if [[ -z $config ]]; then 
         echo "Nothing selected" 

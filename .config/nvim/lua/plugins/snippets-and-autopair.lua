@@ -2,6 +2,7 @@ return {
   -- "rafamadri z/friendly-snippets",
   {
     "windwp/nvim-autopairs",
+    event = "BufReadPre",
     config = function()
       require('nvim-autopairs').setup {
         check_ts = true,
