@@ -42,7 +42,7 @@ vim.g.vimtex_quickfix_ignore_filters = {
 
 return {
   'lervag/vimtex',
-  lazy = false,
+  ft = { 'tex', 'bib' },
   config = function()
     vim.keymap.set("n", "√", vim.cmd.VimtexView, { desc = '[V]iew' }) --NOTE: √ is option V
     vim.cmd [[menu 500 PopUp.Find\ in\ PDF\ (Opt-V)  :VimtexView<CR>]]

@@ -1,5 +1,6 @@
 return {
   "folke/todo-comments.nvim", -- https://github.com/folke/todo-comments.nvim
+  event = "VeryLazy",
   config = function()
     vim.keymap.set("n", "]t", function()
       require("todo-comments").jump_next()

@@ -1,8 +1,21 @@
 return {
-  "seandewar/killersheep.nvim",
-  'ThePrimeagen/vim-be-good',
-  "rktjmp/shenzhen-solitaire.nvim",
-  "alec-gibson/nvim-tetris",
+  {
+    "seandewar/killersheep.nvim",
+    cmd = "KillKillKill"
+  },
+
+  {
+    'ThePrimeagen/vim-be-good',
+    cmd = "VimBeGood"
+  },
+  {
+    "rktjmp/shenzhen-solitaire.nvim",
+    cmd = "ShenzhenSolitaireNewGame"
+  },
+  {
+    "alec-gibson/nvim-tetris",
+    cmd = "Tetris"
+  },
   {
     "jim-fx/sudoku.nvim",
     -- dependencies = "" -- NOTE: add onedark as dependency?

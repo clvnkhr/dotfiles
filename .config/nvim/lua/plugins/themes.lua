@@ -1,8 +1,9 @@
 return {
   -- themes installed at the top; autodarkmode at the bottom
-  "Shatur/neovim-ayu",
-  "ellisonleao/gruvbox.nvim",
+  -- "Shatur/neovim-ayu",
+  -- "ellisonleao/gruvbox.nvim",
   -- 'navarasu/onedark.nvim',
+  { "catppuccin/nvim", name = "catppuccin", enabled = false },
   {
     'olimorris/onedarkpro.nvim',
     lazy = false,

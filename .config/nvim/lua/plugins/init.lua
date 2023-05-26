@@ -26,7 +26,7 @@ return {
 	-- CUSTOM : WIP : Luasnip and friendly snippets added here
 	{
 		'L3MON4D3/LuaSnip',
-		lazy = false,
+		event = "InsertEnter",
 		dependencies = { 'saadparwaiz1/cmp_luasnip', --[[ 'rafamadriz/friendly-snippets' ]] },
 		config = function()
 			-- Load snippets
@@ -38,10 +38,14 @@ return {
 	{
 		-- Autocompletion
 		'hrsh7th/nvim-cmp',
+		event = "VeryLazy",
 		dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+		-- config = function()
+		-- 	require('cmp_setup')
+		-- end
 	},
 	-- Useful plugin to show you pending keybinds.
-	{ 'folke/which-key.nvim',  opts = {} },
+	{ 'folke/which-key.nvim',  opts = {}, lazy = false },
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
@@ -102,7 +106,7 @@ return {
 	},
 
 	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim', opts = {} },
+	{ 'numToStr/Comment.nvim', opts = {}, },
 	-- { 'numToStr/Comment.nvim', opts = { toggler = { line = 'gcc', block = 'gbc' }, } },
 
 	-- Fuzzy Finder (files, lsp, etc)

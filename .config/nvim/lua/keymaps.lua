@@ -1,5 +1,8 @@
-local set = vim.keymap.set
+local mset = require "macaltkey".keymap.set
+local set = vim.keymap.set 
 
+-- TODO: find where other keymaps are defined.
+--
 local keymaps = {
   init = function()
     -- [[ Basic Keymaps ]]
@@ -50,28 +53,28 @@ local keymaps = {
     -- set("n", "<D-/>", "gcc")
 
     -- indentation
-    set("n", "˙", "<<") -- option h and l (<D-h>, <D-l>)
-    set("n", "¬", ">>")
-    set("v", "˙", "<gv") -- works on lines and blocks(!)
-    set("v", "¬", ">gv")
+    mset("n", "<a-h>", "<<")  -- option h and l (<D-h>, <D-l>)
+    mset("n", "<a-l>", ">>")
+    mset("v", "<a-h>", "<gv") -- works on lines and blocks(!)
+    mset("v", "<a-l>", ">gv")
 
-    set('n', '˚', '"addk"aP')         -- option k; note that this deletes lines at the top of the text!
-    set('n', '∆', '"add"ap')
-    set('v', '˚', '"ad<esc>k"aP`[V`]') -- only use these two when
-    set('v', '∆', '"ad<esc>"ap`[V`]') -- in visual line mode.
+    mset('n', '<a-k>', '"addk"aP')          -- option k; note that this deletes lines at the top of the text!
+    mset('n', '<a-j>', '"add"ap')
+    mset('v', '<a-k>', '"ad<esc>k"aP`[V`]') -- only use these two when
+    mset('v', '<a-j>', '"ad<esc>"ap`[V`]')  -- in visual line mode.
 
-    -- set('n', '', '"ayy"aP')         -- option k; note that this deletes lines at the top of the text!
-    -- set('n', 'Ô', '"ayy"ap')          -- duplicate lines
+    -- mset('n', '', '"ayy"aP')         -- option k; note that this deletes lines at the top of the text!
+    -- mset('n', 'Ô', '"ayy"ap')          -- duplicate lines
 
     --quick save button and buffer close
-    set('n', 'œ', ':bd<CR>') -- option Q
-    set('n', '∑', ':w<CR>') -- option W
+    mset('n', '<a-q>', ':bd<CR>') -- option Q
+    mset('n', '<a-w>', ':w<CR>')  -- option W
 
     -- common commands while in insert mode
-    set('i', '„', '<C-O>W', { noremap = true })
-    set('i', 'ı', '<C-O>B', { noremap = true })
-    set('i', '∑', '<C-O>w', { noremap = true })
-    set('i', '∫', '<C-O>b', { noremap = true })
+    mset('i', '<a-W>', '<C-O>W')
+    mset('i', '<a-B>', '<C-O>B')
+    mset('i', '<a-w>', '<C-O>w')
+    mset('i', '<a-b>', '<C-O>b')
 
     --blocks of text to play with!
     --
@@ -126,10 +129,10 @@ local keymaps = {
     -- set('i', '<C-l>', '<C-\\><C-N><C-w>w', { noremap = true })
 
     -- Commands for making splits
-    set('n', 'Ó', '<C-W>v', { noremap = true })      -- altshift h
-    set('n', 'Ò', '<C-W>v<C-W>l', { noremap = true }) -- altshift l
-    set('n', '', '<C-W>s', { noremap = true })     -- altshift k
-    set('n', 'Ô', '<C-W>s<C-W>j', { noremap = true }) -- altshift j
+    mset('n', '<a-H>', '<C-W>v', { noremap = true })
+    mset('n', '<a-L>', '<C-W>v<C-W>l', { noremap = true })
+    mset('n', '<a-K>', '<C-W>s', { noremap = true })
+    mset('n', '<a-J>', '<C-W>s<C-W>j', { noremap = true })
 
     -- entering and exiting terminal
     set('n', '<C-T>', '<cmd>terminal<cr>', { noremap = true })
@@ -158,13 +161,14 @@ local keymaps = {
 
     set('n', '<leader>dvo', '<cmd>DiffviewOpen<cr>', { desc = "[D]iff[V]iew[O]pen" })
     set('n', '<leader>dvc', '<cmd>DiffviewClose<cr>', { desc = "[D]iff[V]iew[C]lose" })
+
+    -- plugin testing commands
+    set("n", "<leader><localleader>t", [[<Plug>PlenaryTestFile]])
+    set("n", "<leader><localleader>s", [[<cmd>source %<cr>]])
   end,
 
+  -- keybinds when the LSP attaches
   on_attach = function(_, bufnr)
-    -- NOTE: Remember that lua is a real programming language, and as such it is possible
-    -- to define small helper and utility functions so you don't have to repeat yourself
-    -- many times.
-    --
     -- In this case, we create a function that lets us more easily define mappings specific
     -- for LSP related items. It sets the mode, buffer and description for us each time.
     local nmap = function(keys, func, desc)
@@ -175,9 +179,6 @@ local keymaps = {
       set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-
-    -- HACK: this is just copied into ./lua/custom/plugins/metals.lua, BY HAND. So if you change something here, do it again there
-    -- TODO: figure out how to reduce code duplication...
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -204,6 +205,10 @@ local keymaps = {
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
       vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
+  end,
+
+  autosave = function()
+    vim.api.nvim_set_keymap("n", "<leader>tas", ":SosToggle<CR>", { desc = "[T]oggle [A]uto[S]ave" })
   end
 }
 

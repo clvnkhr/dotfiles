@@ -1,5 +1,6 @@
 return {
   "dense-analysis/ale",
+  ft = "tex",
   config = function()
     vim.cmd [[
      let g:ale_use_neovim_diagnostics_api = 1

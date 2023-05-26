@@ -20,8 +20,8 @@ vim.wo.relativenumber = true -- relative line numbers
 vim.o.mouse = 'a'            -- Enable mouse mode
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
+-- Remove this option if you want your OS clipboard to remain independent.
+-- See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
 -- [[ Highlight on yank, See `:help vim.highlight.on_yank()`]]
@@ -38,6 +38,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.o.breakindent = true -- Enable break indent
 vim.o.linebreak = true
 vim.o.showbreak = "󱞪 "
+
+-- vim.opt.list = true
+-- vim.opt.listchars:append "space:⋅"
+-- vim.opt.listchars:append "eol:"
 
 vim.o.undofile = true   -- Save undo history. see also ./lua/custom/plugin/undotree.lua
 

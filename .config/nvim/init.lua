@@ -21,6 +21,7 @@ For translating between vimscript and lua, search through `:help lua-guide`
 --]]
 require('vim_options')
 
+
 -- Install package manager,  https://github.com/folke/lazy.nvim, see `:help lazy.nvim.txt`
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -66,6 +67,18 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 if vim.g.neovide then
   require 'neovide_options'
 end
+
+--[[ -- define a function that yanks the current word and passes it to gx
+local function yank_and_open()
+  -- yank the current word under the cursor
+  vim.cmd("normal! yiw")
+  -- add some characters to the yanked word
+  vim.fn.setreg("+", vim.fn.getreg("+") .. "some characters")
+  -- call netrw's gx function with the modified word
+  vim.fn.netrw#BrowseX(vim.fn.getreg("+"), vim.fn.netrw#CheckIfRemote())
+end ]]
+-- map the function to a user command
+-- vim.cmd("command! YankAndOpen lua yank_and_open()")
 
 -- require "telescope".extensions.metals.commands()
 

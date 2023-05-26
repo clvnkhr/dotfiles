@@ -2,9 +2,10 @@ return {
   {
     -- autosaver, turned off by default
     'tmillr/sos.nvim',
+    enabled = false,
     config = function()
-      vim.api.nvim_set_keymap("n", "<leader>tas", ":SosToggle<CR>", { desc = "[T]oggle [A]uto[S]ave" })
       require("sos").setup { enabled = false, timeout = 1000 }
+      require "keymaps".autosave()
     end
   }
   ,

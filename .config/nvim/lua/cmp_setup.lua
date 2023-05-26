@@ -49,13 +49,16 @@ local servers = {
     -- cmd = { "texlab", "-vvvv", "--log-file=tmp/texlab.log" },
   }, -- https://github.com/latex-lsp/texlab/wiki/Configuration
   ltex = {
-    -- ltex = {
-    --   -- NOTE: there are extra settings in ltex_extra. See lua/cmp_setup.lua
-    --   language = "en-GB",
-    --   disabledRules = {
-    --     en = { "OXFORD_SPELLING_Z_NOT_S" } -- TODO: this doesn't work. Why?
-    --   }
-    -- },
+    ltex = {
+      -- NOTE: there are extra settings in ltex_extra. See lua/cmp_setup.lua
+      language = "en-GB",
+      disabledRules = {
+        ['en-GB'] = { "OXFORD_SPELLING_Z_NOT_S" }
+      },
+      dictionary = {
+        ['en-GB'] = { "Leray", "Buckmaster" }
+      }
+    },
   },
   rust_analyzer = {},
   -- tsserver = {},
@@ -112,15 +115,6 @@ luasnip.config.setup { -- custom setup taken from https://www.youtube.com/watch?
   --   },
   -- },
 }
-
--- custom from tjdv's video on luasnip: <c-k> is my expansion keys:
--- this will expand the current item or jump to the next item within the snippet.
--- vim.keymap.set({ "i", "s" }, "<c-k>", function()
---   if luasnip.expand_or_jumpable() then
---     luasnip.expand_or_jump()
---   end
--- end, { silent = true }
--- )
 
 cmp.setup {
   snippet = {
