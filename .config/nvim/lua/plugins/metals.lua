@@ -1,7 +1,9 @@
 return {
   'scalameta/nvim-metals',
   dependencies = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap", },
-  ft = { "sc", "scala" },
+  -- ft = { "sc", "scala", "sbt", "java" },
+  -- keys = { "<leader><localleader><leader>m", "<cmd>!touch blah.scala<cr><cmd>MetalsNewScalaProject<cr>" },
+
   config = function()
     -- Metals setup (scala LSP)
     --

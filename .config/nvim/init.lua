@@ -68,6 +68,15 @@ if vim.g.neovide then
   require 'neovide_options'
 end
 
+-- vim.cmd [[
+-- augroup Hiunicode
+--   autocmd!
+--   autocmd BufEnter *
+--       \ syntax match nonascii "[^\x00-\x7F]" |
+--       \ highlight nonascii ctermfg=NONE ctermbg=red
+-- augroup END
+-- ]]
+
 --[[ -- define a function that yanks the current word and passes it to gx
 local function yank_and_open()
   -- yank the current word under the cursor

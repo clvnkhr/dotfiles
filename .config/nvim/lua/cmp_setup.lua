@@ -50,15 +50,16 @@ local servers = {
   }, -- https://github.com/latex-lsp/texlab/wiki/Configuration
   ltex = {
     ltex = {
+      enabled = { "tex", "latex", "lua" },
       -- NOTE: there are extra settings in ltex_extra. See lua/cmp_setup.lua
       language = "en-GB",
       disabledRules = {
         ['en-GB'] = { "OXFORD_SPELLING_Z_NOT_S" }
       },
       dictionary = {
-        ['en-GB'] = { "Leray", "Buckmaster" }
-      }
-    },
+        ['en-GB'] = { "Leray", "Buckmaster", "Khor", "Xiaoyan", "Su", }
+      },
+    }
   },
   rust_analyzer = {},
   -- tsserver = {},

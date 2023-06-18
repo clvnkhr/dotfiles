@@ -3,5 +3,7 @@ return {
 	'vimwiki/vimwiki',
 	keys = { "<leader>w" },
 	ft = "md, wiki",
-
+	config = function()
+		vim.keymap.set({ "n", }, "<localleader>d", "<Plug>VimwikiToggleListItem", { noremap = false })
+	end
 }

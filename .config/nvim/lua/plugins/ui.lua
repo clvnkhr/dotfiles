@@ -52,14 +52,15 @@ return {
 
 			require 'barbar'.setup {
 				icons = {
-					separator = {
-						left = "⎡"
-					},
-					inactive = {
-						separator = {
-							left = "⎡"
-						},
-					}
+					preset = "slanted",
+					-- separator = {
+					-- 	left = "󰅂"
+					-- },
+					-- inactive = {
+					-- 	separator = {
+					-- 		left = "▎"
+					-- 	},
+					-- }
 				},
 			}
 			-- Other:

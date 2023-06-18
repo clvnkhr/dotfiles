@@ -50,12 +50,12 @@ return {
         set_dark_mode = function()
           -- vim.api.nvim_set_option('background', 'dark')
           vim.cmd('colorscheme catppuccin-frappe')
-          require 'lualine'.setup { options = { theme = require 'lualine.themes.onedark' } }
+          -- require 'lualine'.setup { options = { theme = require 'lualine.themes.onedark' } }
         end,
         set_light_mode = function()
           vim.api.nvim_set_option('background', 'light')
           vim.cmd('colorscheme catppuccin-latte')
-          require 'lualine'.setup { options = { theme = require 'lualine.themes.onelight' } }
+          -- require 'lualine'.setup { options = { theme = require 'lualine.themes.onelight' } }
         end,
       })
       auto_dark_mode.init()

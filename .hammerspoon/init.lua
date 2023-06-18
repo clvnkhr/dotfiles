@@ -20,6 +20,8 @@ local function print_mouse_pos()
 	print(hs.inspect(hs.mouse.absolutePosition()))
 end
 
+-- hs.loadSpoon("Calendar")
+-- hs.loadSpoon("AClock")
 local function print_attr_at_mouse_pos()
 	local mouse_pos = hs.axuielement.systemElementAtPosition(hs.mouse.absolutePosition())
 	print("attr_at_mouse_pos")

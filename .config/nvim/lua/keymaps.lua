@@ -1,5 +1,5 @@
 local mset = require "macaltkey".keymap.set
-local set = vim.keymap.set 
+local set = vim.keymap.set
 
 -- TODO: find where other keymaps are defined.
 --
@@ -40,7 +40,7 @@ local keymaps = {
     set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
     set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
     -- set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-    -- NOTE: above is replaced with :Trouble in lua/custom/plugins/ui.lua
+    -- NOTE: above is replaced with :Trouble in lua/plugins/ui.lua
 
 
     -- ThePrimeagen style remap, https://www.youtube.com/watch?v=KfENDDEpCsI&list=PLm323Lc7iSW_wuxqmKx_xxNtJC_hJbQ7R&index=3
@@ -102,41 +102,43 @@ local keymaps = {
     -- Remap Control + H / J / K / L to move between windows
     --
     -- NORMAL MODE
-    set('n', '<C-H>', '<C-W>h', { noremap = true })
-    set('n', '<C-J>', '<C-W>j', { noremap = true })
-    set('n', '<C-K>', '<C-W>k', { noremap = true })
-    set('n', '<C-L>', '<C-W>l', { noremap = true })
+    set('n', '<C-H>', '<C-W>h')
+    set('n', '<C-J>', '<C-W>j')
+    set('n', '<C-K>', '<C-W>k')
+    set('n', '<C-L>', '<C-W>l')
     -- Remap Control + H and Control + L to cycle through windows
-    -- set('n', '<C-h>', '<C-w>W', { noremap = true })
-    -- set('n', '<C-l>', '<C-w>w', { noremap = true })
+    -- set('n', '<C-h>', '<C-w>W')
+    -- set('n', '<C-l>', '<C-w>w')
 
     -- TERMINAL MODE
-    set('t', '<C-H>', ' <C-\\><C-N><C-W>h', { noremap = true })
-    set('t', '<C-J>', ' <C-\\><C-N><C-W>j', { noremap = true })
-    set('t', '<C-K>', '<C-\\><C-N><C-W>k', { noremap = true })
-    set('t', '<C-L>', '<C-W>l', { noremap = true })
+    set('t', '<C-H>', ' <C-\\><C-N><C-W>h')
+    set('t', '<C-J>', ' <C-\\><C-N><C-W>j')
+    set('t', '<C-K>', '<C-\\><C-N><C-W>k')
+    set('t', '<C-L>', '<C-W>l')
     -- Remap Control + H and Control + L to cycle through windows
-    -- set('t', '<C-h>', '<C-\\><C-N><C-w>W', { noremap = true })
-    -- set('t', '<C-l>', '<C-\\><C-N><C-w>w', { noremap = true })
+    -- set('t', '<C-h>', '<C-\\><C-N><C-w>W')
+    -- set('t', '<C-l>', '<C-\\><C-N><C-w>w')
 
     -- INSERT MODE
-    set('i', '<C-H>', ' <C-\\><C-N><C-W>h', { noremap = true })
-    set('i', '<C-J>', ' <C-\\><C-N><C-W>j', { noremap = true })
-    set('i', '<C-K>', '<C-\\><C-N><C-W>k', { noremap = true })
-    set('i', '<C-L>', '<C-W>l', { noremap = true })
+    set('i', '<C-H>', ' <C-\\><C-N><C-W>h')
+    set('i', '<C-J>', ' <C-\\><C-N><C-W>j')
+    set('i', '<C-K>', '<C-\\><C-N><C-W>k')
+    set('i', '<C-L>', '<C-W>l')
     -- Remap Control + H and Control + L to cycle through windows
-    -- set('i', '<C-h>', '<C-\\><C-N><C-w>W', { noremap = true })
-    -- set('i', '<C-l>', '<C-\\><C-N><C-w>w', { noremap = true })
+    -- set('i', '<C-h>', '<C-\\><C-N><C-w>W')
+    -- set('i', '<C-l>', '<C-\\><C-N><C-w>w')
 
     -- Commands for making splits
-    mset('n', '<a-H>', '<C-W>v', { noremap = true })
-    mset('n', '<a-L>', '<C-W>v<C-W>l', { noremap = true })
-    mset('n', '<a-K>', '<C-W>s', { noremap = true })
-    mset('n', '<a-J>', '<C-W>s<C-W>j', { noremap = true })
+    mset('n', '<a-H>', '<C-W>v')
+    mset('n', '<a-L>', '<C-W>v<C-W>l')
+    mset('n', '<a-K>', '<C-W>s')
+    mset('n', '<a-J>', '<C-W>s<C-W>j')
 
     -- entering and exiting terminal
-    set('n', '<C-T>', '<cmd>terminal<cr>', { noremap = true })
-    set('t', "<Esc>", "<C-\\><C-n>", { noremap = true })
+    mset('n', '<a-t>', '<cmd>terminal<cr>')
+    set('t', "<Esc>", "<C-\\><C-n>")
+    set('t', "<C-t>", "<C-\\><cmd>FloatermToggle<cr>")
+    -- INFO: see also lua/plugins/floatterm.lua
 
     -- resizing windows
     set("n", "=", [[<cmd>vertical resize +5<cr>]])   -- make the window biger vertically

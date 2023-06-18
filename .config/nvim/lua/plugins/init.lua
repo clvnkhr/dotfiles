@@ -85,7 +85,7 @@ return {
 		opts = {
 			options = {
 				icons_enabled = true,
-				theme = 'auto',
+				theme = "catppuccin",
 				component_separators = '󱐋',
 				section_separators = { left = '', right = '' },
 				disabled_filetypes = { 'neo-tree' },
@@ -103,6 +103,7 @@ return {
 		-- See `:help indent_blankline.txt`
 		opts = {
 			char = '┇',
+			space_char_blankline = " ",
 			show_trailing_blankline_indent = false,
 			show_current_context = true,
 			show_current_context_start = true,

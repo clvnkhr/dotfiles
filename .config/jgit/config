@@ -1,3 +1,6 @@
 [filesystem "AdoptOpenJDK|1.8.0_292|/dev/disk3s5"]
 	timestampResolution = 1001 milliseconds
 	minRacyThreshold = 0 nanoseconds
+[filesystem "Eclipse Adoptium|20|/dev/disk3s5"]
+	timestampResolution = 2000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
