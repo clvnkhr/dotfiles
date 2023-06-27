@@ -51,17 +51,30 @@ local keymaps = {
     -- set("n", "÷", "gcc") -- <D-/> (D = option)
     -- set("v", "÷", "gc")
     -- set("n", "<D-/>", "gcc")
+    -- set("n", "<a-/>", "gcc")
+    -- I suspect this is because gcc is provided by something else so this requires remapping
 
     -- indentation
-    mset("n", "<a-h>", "<<")  -- option h and l (<D-h>, <D-l>)
-    mset("n", "<a-l>", ">>")
-    mset("v", "<a-h>", "<gv") -- works on lines and blocks(!)
-    mset("v", "<a-l>", ">gv")
+    set("n", "<a-[>", "<<")  -- option h and l (<D-h>, <D-l>)
+    set("n", "<a-]>", ">>")
+    set("v", "<a-[>", "<gv") -- works on lines and blocks(!)
+    set("v", "<a-]>", ">gv")
 
-    mset('n', '<a-k>', '"addk"aP')          -- option k; note that this deletes lines at the top of the text!
-    mset('n', '<a-j>', '"add"ap')
-    mset('v', '<a-k>', '"ad<esc>k"aP`[V`]') -- only use these two when
-    mset('v', '<a-j>', '"ad<esc>"ap`[V`]')  -- in visual line mode.
+    -- keymap to move lines
+    vim.cmd [[
+    nnoremap <A-j> :m .+1<CR>==
+    nnoremap <A-k> :m .-2<CR>==
+    inoremap <A-j> <Esc>:m .+1<CR>==gi
+    inoremap <A-k> <Esc>:m .-2<CR>==gi
+    vnoremap <A-j> :m '>+1<CR>gv=gv
+    vnoremap <A-k> :m '<-2<CR>gv=gv
+    ]]
+
+
+    -- mset('n', '<a-k>', '"addk"aP')          -- option k; note that this deletes lines at the top of the text!
+    -- mset('n', '<a-j>', '"add"ap')
+    -- mset('v', '<a-k>', '"ad<esc>k"aP`[V`]') -- only use these two when
+    -- mset('v', '<a-j>', '"ad<esc>"ap`[V`]')  -- in visual line mode.
 
     -- mset('n', '', '"ayy"aP')         -- option k; note that this deletes lines at the top of the text!
     -- mset('n', 'Ô', '"ayy"ap')          -- duplicate lines

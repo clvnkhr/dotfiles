@@ -40,7 +40,7 @@ export VISUAL="$EDITOR"
 export NEOVIDE_MULTIGRID="true"
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-20.jdk/Contents/Home"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"
-export CC=gcc-12
+export CC="/opt/homebrew/Cellar/gcc/13.1.0/bin/gcc-13"
     # INFO: this gcc is more recent than the system one. Needed for compiling treesitter for neorg
 
 alias astronvim="NVIM_APPNAME=AstroNvim nvim"
