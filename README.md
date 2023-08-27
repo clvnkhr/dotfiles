@@ -14,7 +14,7 @@ organized with yadm
 
 ### Python: 
   - rtx to install versions
-  - pdm init
+  - pdm init to setup venv and then eval $(pdm venv activate)
 
 ### Scala:
   - Install JVM
