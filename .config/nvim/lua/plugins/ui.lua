@@ -3,7 +3,7 @@ return {
 		'romgrk/barbar.nvim',
 		-- cond = false,
 		dependencies = 'nvim-tree/nvim-web-devicons',
-		event = "BufReadPre",
+		-- event = "BufReadPre",
 		-- lazy = false,
 		config = function()
 			local map = vim.api.nvim_set_keymap

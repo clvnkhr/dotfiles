@@ -19,7 +19,7 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    -- 'leoluz/nvim-dap-go',
   },
   config = function()
     local dap = require 'dap'
@@ -40,17 +40,20 @@ return {
 
     -- You can provide additional configuration to the handlers,
     -- see mason-nvim-dap README for more information
-    require('mason-nvim-dap').setup_handlers()
+    -- require('mason-nvim-dap').setup_handlers() -- this is depreciated
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<F5>', dap.continue)
     vim.keymap.set('n', '<F1>', dap.step_into)
     vim.keymap.set('n', '<F2>', dap.step_over)
     vim.keymap.set('n', '<F3>', dap.step_out)
-    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
+    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = "set breakpoint" })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-    end)
+    end, { desc = "set conditional breakpoint" })
+    vim.keymap.set('n', '<leader>dr', dap.repl.open, { desc = "DAP repl" })
+    vim.keymap.set('n', '<leader>du', dapui.toggle, { desc = "DAP UI toggle" })
+
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -78,6 +81,6 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
-    require('dap-go').setup()
+    -- require('dap-go').setup()
   end,
 }

@@ -4,7 +4,7 @@ vim.o.foldcolumn = '1'
 return {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
-  event = "BufReadPre",
+  -- event = "BufReadPre",
   config = function()
     require('ufo').setup() -- TODO: look into setup in https://github.com/kevinhwang91/nvim-ufo
   end

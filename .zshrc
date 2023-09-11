@@ -22,6 +22,8 @@ eval "$(zoxide init zsh)"
 alias cd-dropboxlatex="cd /Users/calvinkhor/Library/Mobile\ Documents/com\~apple\~CloudDocs/Dropbox\ LaTeX"
 alias cd-Github="~/Documents/Github/"
 
+alias pdm-activate="eval $(pdm venv activate)"
+
 eval "$(starship init zsh)"
 eval "$(rtx activate zsh)"
 

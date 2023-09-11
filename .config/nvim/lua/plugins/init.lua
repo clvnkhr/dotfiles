@@ -147,6 +147,5 @@ return {
 	},
 
 	require 'kickstart.plugins.autoformat',
-	-- require 'kickstart.plugins.debug',
-	-- { import = 'custom.plugins' },
+	require 'kickstart.plugins.debug',
 }

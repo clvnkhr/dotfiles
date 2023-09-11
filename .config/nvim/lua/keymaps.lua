@@ -29,6 +29,8 @@ local keymaps = {
     end, { desc = '[/] Fuzzily search in current buffer' })
 
     set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+    set('n', '<leader>fz', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Current Buffer Fuzzy Find' })
+
     set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
     set('n', '<leader>sw', require('telescope.builtin').grep_string,
       { desc = '[S]earch current [W]ord' })
@@ -193,7 +195,9 @@ local keymaps = {
 
       set('n', keys, func, { buffer = bufnr, desc = desc })
     end
-
+    nmap("<localleader>f",
+      [[<cmd>:lua vim.lsp.buf.format{timeout_ms = 10000}<cr><cmd>:w<cr><cmd>:lua print('Formatted')<cr>]],
+      '[F]ormat using LSP')
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -224,6 +228,10 @@ local keymaps = {
 
   autosave = function()
     vim.api.nvim_set_keymap("n", "<leader>tas", ":SosToggle<CR>", { desc = "[T]oggle [A]uto[S]ave" })
+  end,
+
+  outline = function()
+    vim.keymap.set('n', '<leader>cl', '<cmd>AerialToggle!<CR>', { desc = "Code Layout" })
   end
 }
 

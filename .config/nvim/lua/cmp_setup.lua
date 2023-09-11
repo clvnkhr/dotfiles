@@ -38,7 +38,8 @@ vim.diagnostic.config {
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
+  -- pylsp = {},
   texlab = {
     -- symbols = {
     --   ignoredPatterns = { "\\" }, -- TODO: fix this, and then remove the \\ stopgap in the snippet
@@ -62,7 +63,7 @@ local servers = {
     }
   },
   rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },

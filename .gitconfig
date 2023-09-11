@@ -27,3 +27,5 @@
     colorMoved = default
 
 
+[pull]
+	rebase = false
