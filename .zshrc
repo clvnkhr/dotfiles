@@ -22,7 +22,8 @@ eval "$(zoxide init zsh)"
 alias cd-dropboxlatex="cd /Users/calvinkhor/Library/Mobile\ Documents/com\~apple\~CloudDocs/Dropbox\ LaTeX"
 alias cd-Github="~/Documents/Github/"
 
-alias pdm-activate="eval $(pdm venv activate)"
+# alias pdm-activate="eval $(pdm venv activate)"
+# the above line causes a "The project doesn't have a saved python.path. Run pdm use to pick one." on startup. 
 
 eval "$(starship init zsh)"
 eval "$(rtx activate zsh)"
