@@ -1,6 +1,8 @@
 return {
   'jose-elias-alvarez/null-ls.nvim',
+  enabled = false,
   event = "BufReadPre",
+
   ft = { "python", "javascript", "typescript" },
   opts = {},
   config = function()
